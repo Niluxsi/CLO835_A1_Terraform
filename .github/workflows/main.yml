@@ -31,7 +31,8 @@ jobs:
           IMAGE_TAG: v0.1
       - name: Login to AWS ECR
         id: login
-        run: aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY
+        run: echo ${{ secrets.AWS_ECR_REGISTRY }} | docker login --username AWS --password-stdin ${{ env.ECR_REPOSITORY }}
+
 
       - name: Build and Push Docker Image
         run: |
